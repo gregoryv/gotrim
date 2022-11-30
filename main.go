@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/gregoryv/cmdline"
+	"github.com/gregoryv/vt100"
 )
 
 func main() {
@@ -19,12 +20,12 @@ func main() {
 	s := bufio.NewScanner(os.Stdin)
 
 	home := os.Getenv("HOME")
-
+	at := vt100.Attributes()
 	for s.Scan() {
 		line := s.Text()
 		line = strings.ReplaceAll(line, home, "~")
 		if len(line) > cols {
-			line = fmt.Sprintf("%s%s", line[:cols], suffix)
+			line = fmt.Sprintf("%s%s%v", line[:cols], suffix, at.Reset)
 		}
 
 		fmt.Println(line)
