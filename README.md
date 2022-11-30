@@ -16,3 +16,7 @@ gotrim - Convenient line trimmer with sane defaults
     
         -h, --help
 
+
+gotrim trims lines on stdin, e.g.
+
+    $ cat testdata/example.txt | gotrim
