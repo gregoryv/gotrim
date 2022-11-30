@@ -4,7 +4,7 @@ gotrim - Convenient line trimmer with sane defaults
 
 ## Quick start
 
-    $ go get github.com/gregoryv/gotrim
+    $ go install github.com/gregoryv/gotrim@latest
     $ gotrim -h
     Usage: gotrim [OPTIONS]
     
