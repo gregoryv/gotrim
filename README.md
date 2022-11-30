@@ -20,3 +20,11 @@ gotrim - Convenient line trimmer with sane defaults
 gotrim trims lines on stdin, e.g.
 
     $ cat testdata/example.txt | gotrim
+
+
+## Features
+
+1. Trim by specific column
+1. Indicate trim with suffix
+1. Replace tabs with spaces
+1. Replace $HOME/path with ~/path
