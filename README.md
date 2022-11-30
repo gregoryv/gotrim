@@ -1,4 +1,4 @@
-gotrim - 
+gotrim - Convenient line trimmer with sane defaults
 
 ## Quick start
 
