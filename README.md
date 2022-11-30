@@ -1,5 +1,7 @@
 gotrim - Convenient line trimmer with sane defaults
 
+![](./gotrim_logo.svg)
+
 ## Quick start
 
     $ go get github.com/gregoryv/gotrim
