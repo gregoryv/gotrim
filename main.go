@@ -15,6 +15,9 @@ func main() {
 		cli    = cmdline.NewBasicParser()
 		cols   = cli.Option("-c, --columns").Int(72)
 		suffix = cli.Option("-s, --suffix").String("...")
+
+		tabWidth = cli.Option("-t, --tab-width", "number of spaces").Int(4)
+		tab      = strings.Repeat(" ", tabWidth)
 	)
 	cli.Parse()
 	s := bufio.NewScanner(os.Stdin)
@@ -24,8 +27,13 @@ func main() {
 	for s.Scan() {
 		line := s.Text()
 		line = strings.ReplaceAll(line, home, "~")
+		// replace tabs
+		if tabWidth > 0 {
+			line = strings.ReplaceAll(line, "\t", tab)
+		}
+
 		if len(line) > cols {
-			line = fmt.Sprintf("%s%s%v", line[:cols], suffix, at.Reset)
+			line = fmt.Sprintf("%s%s%v", line[:cols], at.Reset, suffix)
 		}
 
 		fmt.Println(line)
