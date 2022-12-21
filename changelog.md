@@ -6,6 +6,7 @@ and this project adheres to http://semver.org/spec/v2.0.0.html.
 
 ## [unreleased]
 
+- Add option --path-len to cmd/trim
 - Add Trimmer.PathLen
 - Add func TrimPaths
 - Add type Trimmer
