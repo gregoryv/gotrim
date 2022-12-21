@@ -1,4 +1,4 @@
 A short line
 
 Next line has $HOME replaced with ~
-/home/gregory/src/github.com/gregoryv/gotrim
+/home/gregory/src/github.com/gregoryv/trim

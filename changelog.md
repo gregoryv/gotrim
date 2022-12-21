@@ -6,6 +6,7 @@ and this project adheres to http://semver.org/spec/v2.0.0.html.
 
 ## [unreleased]
 
+- Rename package to gregoryv/trim
 - Add cmd/trim
 
 ## [0.2.0] 2022-11-30

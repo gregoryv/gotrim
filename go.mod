@@ -1,4 +1,4 @@
-module github.com/gregoryv/gotrim
+module github.com/gregoryv/trim
 
 go 1.19
 

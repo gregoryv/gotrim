@@ -1,12 +1,12 @@
-gotrim - Convenient line trimmer with sane defaults
+trim - Convenient line trimmer with sane defaults
 
 ![](./gotrim_logo.svg)
 
 ## Quick start
 
-    $ go install github.com/gregoryv/gotrim@latest
-    $ gotrim -h
-    Usage: gotrim [OPTIONS]
+    $ go install github.com/gregoryv/trim@latest
+    $ trim -h
+    Usage: trim [OPTIONS]
     
     Options
         -c, --columns : 72
@@ -17,9 +17,9 @@ gotrim - Convenient line trimmer with sane defaults
         -h, --help
 
 
-gotrim trims lines on stdin, e.g.
+trim trims lines on stdin, e.g.
 
-    $ cat testdata/example.txt | gotrim
+    $ cat testdata/example.txt | trim
 
 
 ## Features
