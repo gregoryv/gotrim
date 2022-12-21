@@ -64,36 +64,46 @@ func (t *Trimmer) Trim(w io.Writer, r io.Reader) {
 	}
 }
 
+// TrimPaths shortens first path in the given string to max cols. Min
+// cols is 6.
 func TrimPaths(cols int, in string) string {
-	var buf bytes.Buffer
+	if len(in) < cols {
+		return in
+	}
+	if cols < 6 {
+		cols = 6
+	}
 	r := bufio.NewReader(strings.NewReader(in))
 
+	// before any path
 	before, err := r.ReadString('/')
-	buf.WriteString(before)
 	if err != nil {
-		return buf.String()
+		// no path found
+		return before
 	}
+	var buf bytes.Buffer
+	buf.WriteString(before)
+
+	// shorten path
+	prefix := "/"
+	if strings.HasSuffix(prefix, "~/") {
+		prefix = "~/"
+	}
+	sep := "..."
+	max := cols - len(prefix) - len(sep)
 
 	dir, _ := r.ReadString(' ')
+	if len(dir) > max {
+		buf.WriteString(sep)
 
-	var short string
-	var i, lastSep int
-	for i = len(dir) - 1; i >= 0; i-- {
-		if dir[i] == '/' {
-			lastSep = i
+		short := dir[len(dir)-max:]
+		i := strings.Index(short, "/")
+		if i > -1 {
+			short = short[i:]
 		}
-		if len(dir[i:]) > cols-3 { // 3 = len("...")
-			break
-		}
-		short = dir[lastSep:]
-	}
-	if i > 0 {
-		buf.WriteString("...")
 		buf.WriteString(short)
-	} else {
-		buf.WriteString(dir)
 	}
-
+	// the rest
 	io.Copy(&buf, r)
 	return buf.String()
 }

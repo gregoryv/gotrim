@@ -49,6 +49,8 @@ func TestTrimPaths(t *testing.T) {
 	}{
 		{len: 10, in: "/a/b", out: "/a/b"},
 		{len: 6, in: "/a/b/c/d", out: "/.../d"},
+		{len: -1, in: "~/a/b/c/d", out: "~/.../d"},
+		{len: 8, in: "/aabbccddee", out: "/...ddee"},
 	}
 	for _, c := range cases {
 		if v := TrimPaths(c.len, c.in); v != c.out {
