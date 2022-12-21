@@ -6,6 +6,8 @@ and this project adheres to http://semver.org/spec/v2.0.0.html.
 
 ## [unreleased]
 
+- Add func TrimPaths
+- Add type Trimmer
 - Rename package to gregoryv/trim
 - Add cmd/trim
 

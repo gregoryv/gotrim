@@ -2,6 +2,7 @@ package trim
 
 import (
 	"bufio"
+	"bytes"
 	"fmt"
 	"io"
 	"os"
@@ -50,11 +51,43 @@ func (t *Trimmer) Trim(w io.Writer, r io.Reader) {
 		if t.TabWidth > 0 {
 			line = strings.ReplaceAll(line, "\t", tab)
 		}
-
 		if len(line) > t.Columns {
 			line = fmt.Sprintf("%s%s%v", line[:t.Columns], at.Reset, t.Suffix)
 		}
-
 		fmt.Fprintln(w, line)
 	}
+}
+
+func TrimPaths(cols int, in string) string {
+	var buf bytes.Buffer
+	r := bufio.NewReader(strings.NewReader(in))
+
+	before, err := r.ReadString('/')
+	buf.WriteString(before)
+	if err != nil {
+		return buf.String()
+	}
+
+	dir, _ := r.ReadString(' ')
+
+	var short string
+	var i, lastSep int
+	for i = len(dir) - 1; i >= 0; i-- {
+		if dir[i] == '/' {
+			lastSep = i
+		}
+		if len(dir[i:]) > cols-3 { // 3 = len("...")
+			break
+		}
+		short = dir[lastSep:]
+	}
+	if i > 0 {
+		buf.WriteString("...")
+		buf.WriteString(short)
+	} else {
+		buf.WriteString(dir)
+	}
+
+	io.Copy(&buf, r)
+	return buf.String()
 }
