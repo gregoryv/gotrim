@@ -10,6 +10,9 @@ import (
 	"github.com/gregoryv/vt100"
 )
 
+// NewTrimmer returns a trimmer with a column width of 72, replacing
+// tabs with 4 spaces and $HOME with ~. Trimmed lines are indicated
+// with suffix '...'.
 func NewTrimmer() *Trimmer {
 	return &Trimmer{
 		Columns:     72,
@@ -21,13 +24,16 @@ func NewTrimmer() *Trimmer {
 }
 
 type Trimmer struct {
-	Columns     int
-	Suffix      string
+	Columns  int    // Max line length
+	Suffix   string // Added if trimmed
+	TabWidth int    // Number of spaces tabs are replaced with
+
+	ReplaceHome bool // Replace occurences of Trimmer.Home with ~
 	Home        string
-	TabWidth    int
-	ReplaceHome bool
 }
 
+// Trim trims lines from the reader and writes them to the writer.
+// Stops when reader reaches io.EOF.
 func (t *Trimmer) Trim(w io.Writer, r io.Reader) {
 	var (
 		s   = bufio.NewScanner(r)
