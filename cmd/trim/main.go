@@ -16,8 +16,9 @@ func main() {
 			TabWidth:    cli.Option("-t, --tab-width", "number of spaces").Int(4),
 			Home:        os.Getenv("HOME"),
 			ReplaceHome: true,
-			PathLen: cli.Option("-pl, --path-len",
-				"trim paths to len, 0 means no path trimming",
+			PathLen: cli.Option("-l, --path-length",
+				"trim paths to length",
+				"0 means no trimming and min length is 6",
 			).Int(20),
 		}
 	)
