@@ -1,10 +1,10 @@
 trim - Convenient line trimmer with sane defaults
 
-![](./gotrim_logo.svg)
+![](./trim_logo.svg)
 
 ## Quick start
 
-    $ go install github.com/gregoryv/trim@latest
+    $ go install github.com/gregoryv/cmd/trim@latest
     $ trim -h
     Usage: trim [OPTIONS]
     
