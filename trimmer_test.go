@@ -15,13 +15,14 @@ Next line has $HOME replaced with ~
 
 	t := NewTrimmer()
 	t.Home = "/home/johndoe"
+	t.PathLen = 20
 	t.Trim(os.Stdout, r)
 
 	// output:
 	// A short line
 	//
 	// Next line has $HOME replaced with ~
-	// ~/src/github.com/gregoryv/trim
+	// ~/.../gregoryv/trim
 }
 
 func ExampleTrimPaths() {

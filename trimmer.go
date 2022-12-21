@@ -21,6 +21,7 @@ func NewTrimmer() *Trimmer {
 		Home:        os.Getenv("HOME"),
 		TabWidth:    4,
 		ReplaceHome: true,
+		PathLen:     20,
 	}
 }
 
@@ -31,6 +32,8 @@ type Trimmer struct {
 
 	ReplaceHome bool // Replace occurences of Trimmer.Home with ~
 	Home        string
+
+	PathLen int
 }
 
 // Trim trims lines from the reader and writes them to the writer.
@@ -50,6 +53,9 @@ func (t *Trimmer) Trim(w io.Writer, r io.Reader) {
 		// replace tabs
 		if t.TabWidth > 0 {
 			line = strings.ReplaceAll(line, "\t", tab)
+		}
+		if t.PathLen > 0 {
+			line = TrimPaths(t.PathLen, line)
 		}
 		if len(line) > t.Columns {
 			line = fmt.Sprintf("%s%s%v", line[:t.Columns], at.Reset, t.Suffix)
