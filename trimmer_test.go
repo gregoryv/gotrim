@@ -11,11 +11,15 @@ func ExampleTrimmer_Trim() {
 	r := strings.NewReader(`A short line
 
 Next line has $HOME replaced with ~
-/home/johndoe/src/github.com/gregoryv/trim`)
+/home/johndoe/src/github.com/gregoryv/trim
+two tabs:		a
+three...:			b
+`)
 
 	t := NewTrimmer()
 	t.Home = "/home/johndoe"
 	t.PathLen = 20
+	t.ConsecutiveSpace = 4 // replace 4 concecutive spaces with one
 	t.Trim(os.Stdout, r)
 
 	// output:
@@ -23,6 +27,8 @@ Next line has $HOME replaced with ~
 	//
 	// Next line has $HOME replaced with ~
 	// ~/.../gregoryv/trim
+	// two tabs:  a
+	// three...:   b
 }
 
 func ExampleTrimPaths() {
