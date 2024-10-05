@@ -36,7 +36,7 @@ type Trimmer struct {
 	PathLen int
 
 	// Replace consecutive spaces with one single
-	ConsecutiveSpace int
+	ConsecutiveSpace uint8
 }
 
 // Trim trims lines from the reader and writes them to the writer.
@@ -48,7 +48,8 @@ func (t *Trimmer) Trim(w io.Writer, r io.Reader) {
 		at  = vt100.Attributes()
 	)
 
-	conSpace := strings.Repeat(" ", t.ConsecutiveSpace)
+	conSpace := strings.Repeat(" ", int(t.ConsecutiveSpace))
+
 	for s.Scan() {
 		line := s.Text()
 		if t.ReplaceHome {
@@ -58,7 +59,7 @@ func (t *Trimmer) Trim(w io.Writer, r io.Reader) {
 		if t.TabWidth > 0 {
 			line = strings.ReplaceAll(line, "\t", tab)
 		}
-		if v := t.ConsecutiveSpace; v > 0 {
+		if t.ConsecutiveSpace > 0 {
 			line = strings.ReplaceAll(line, conSpace, " ")
 		}
 

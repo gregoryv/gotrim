@@ -28,7 +28,7 @@ func main() {
 				"-S, --consecutive-space",
 				"number of consecutive spaces to replace with one",
 				"0 means no replacement",
-			).Int(4),
+			).Uint8(4),
 		}
 	)
 	cli.Parse()
