@@ -6,6 +6,7 @@ and this project adheres to http://semver.org/spec/v2.0.0.html.
 
 ## [0.4.0-dev]
 
+- Add option -S, --consecutive-space, default 4
 - Add field Trim.ConsecutiveSpace
 
 ## [0.3.0] 2022-12-21
